@@ -1,0 +1,13 @@
+{
+    "id": 1,
+    "odp": 123,
+    "colata": 123,
+    "odv": 123,
+    "set_lavorazione": "LAMINAZIONE CIRCOLARE",
+    "qualita": "buono 1",
+    "tipo_prodotto": "PVC",
+    "lunghezza": 123,
+    "diametro": 1234,
+    "ultrasuoni": "stringa 1",
+    "durezza": 1237 
+}
