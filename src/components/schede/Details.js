@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 
 const Details = () => {
     let {id} = useParams()
+    const navigate = useNavigate()
 
     const [state, setState] = useState({})
 
@@ -11,6 +12,10 @@ const Details = () => {
         fetch(`http://localhost:3000/api/schede/${id}.json`)
             .then(result => result.json())
             .then(result => setState(result))
+            .catch(error => {
+                alert('Errore nella chiamata')
+                navigate('/schede')
+            })
     }, [id])
 
     return <div className="schede__details text-start">
