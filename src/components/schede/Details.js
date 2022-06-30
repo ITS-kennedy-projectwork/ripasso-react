@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
+import { api_url } from '../../config'
 
 const Details = () => {
     let {id} = useParams()
@@ -8,8 +9,7 @@ const Details = () => {
     const [state, setState] = useState({})
 
     useEffect(() => {
-        // fetch('http://localhost:3000/api/schede/' + id + '.json')
-        fetch(`http://localhost:3000/api/schede/${id}.json`)
+        fetch(`${api_url}/schede/${id}`)
             .then(result => result.json())
             .then(result => setState(result))
             .catch(error => {

@@ -1,0 +1,6 @@
+@host=http://localhost:3004
+
+GET {{host}}/schede
+
+###
+GET {{host}}/schede/1

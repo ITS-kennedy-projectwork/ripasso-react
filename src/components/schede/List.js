@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { api_url } from "../../config"
 
 const List = () => {
     const navigate = useNavigate()
     const [rows, setRows] = useState([])
 
     useEffect( () => {
-        fetch('http://localhost:3000/api/schede.json')
+        fetch(`${api_url}/schede`)
         .then(result => result.json())
         .then(result => setRows(result))
     }, [])

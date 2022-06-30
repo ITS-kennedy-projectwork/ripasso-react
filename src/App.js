@@ -1,24 +1,31 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import SchedeList from './components/schede/List'
 import SchedeDetails from './components/schede/Details'
 import Sidebar from './components/layout/Sidebar';
 import Header from './components/layout/Header';
+import { useState } from 'react';
 
 const Home = () => <div>Home</div>
 const About = () => <div><b>About</b></div>
 
 function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+
+  const mainClass = sidebarOpen 
+   ? 'col-md-9 ms-sm-auto col-lg-10 px-md-4'
+   : 'col ms-sm-auto px-md-4'
+
   return (
     <div className="App">
       <Header />
 
       <div className='container-fluid'>
         <div className='row'>
-          <Sidebar />
+          <Sidebar open={sidebarOpen} />
 
-          <main className='col-md-9 ms-sm-auto col-lg-10 px-md-4'>
+          <main className={mainClass} onClick={() => setSidebarOpen(!sidebarOpen)}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
