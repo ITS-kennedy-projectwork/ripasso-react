@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
 import { api_url } from '../../config'
+import { qualityValues } from '../../constants'
 
 const Details = () => {
     let {id} = useParams()
@@ -17,6 +18,15 @@ const Details = () => {
                 navigate('/schede')
             })
     }, [id])
+
+    const handleInputChange = (e, fieldName) => {
+        setState({
+            ...state,
+            ...{
+                [fieldName]: e.target.value
+            }
+        })
+    }
 
     return <div className="schede__details text-start">
         <h1>Dettagli scheda {id}</h1>
@@ -69,9 +79,25 @@ const Details = () => {
             <div className="col">
 
                 <form className="row g-3">
+                    <div className='col-md-6'>
+                        <label htmlFor='quality' className='form-label'>Qualità {state.qualita}</label>
+                        <select 
+                            id='quality' 
+                            className='form-select'
+                            value={state.qualita}
+                            onChange={e => handleInputChange(e, 'qualita')}
+                        >
+                            <option>Seleziona...</option>
+                            {Object.keys(qualityValues).map( q => <option key={q} value={q}>{qualityValues[q]}</option>)}
+                        </select>
+                    </div>
+
+
                     <div className="col-md-6">
-                        <label htmlFor="inputEmail4" className="form-label">Email</label>
-                        <input type="email" className="form-control" id="inputEmail4" />
+                        <label htmlFor="lunghezza" className="form-label">Lunghezza {state.lunghezza}</label>
+                        <input type="lunghezza" className="form-control" id="lunghezza" value={state.lunghezza}
+                        onChange={e => handleInputChange(e, 'lunghezza')}
+                        />
                     </div>
                     <div className="col-md-6">
                         <label htmlFor="inputPassword4" className="form-label">Password</label>

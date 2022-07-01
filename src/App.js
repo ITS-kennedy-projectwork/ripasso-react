@@ -23,9 +23,9 @@ function App() {
 
       <div className='container-fluid'>
         <div className='row'>
-          <Sidebar open={sidebarOpen} />
+          <Sidebar open={sidebarOpen} callback={setSidebarOpen} />
 
-          <main className={mainClass} onClick={() => setSidebarOpen(!sidebarOpen)}>
+          <main className={mainClass}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
