@@ -1,30 +1,34 @@
 {
   "schede": [
-        {
-            "id": 1,
-            "odp": 123,
-            "colata": 123,
-            "odv": 123,
-            "set_lavorazione": "LAMINAZIONE CIRCOLARE",
-            "tipo_prodotto": "PVC",
-            "qualita": 2,
-            "lunghezza": 123,
-            "diametro": 1234,
-            "ultrasuoni": "stringa 1",
-            "durezza": 1237 
-        },
-        {
-            "id": 2,
-            "odp": 234,
-            "colata": 2345,
-            "odv": 2346,
-            "set_lavorazione": "LAMINAZIONE CIRCOLARE 2",
-            "qualita": 3,
-            "tipo_prodotto": "PVC",
-            "lunghezza": 223,
-            "diametro": 2234,
-            "ultrasuoni": "stringa 2",
-            "durezza": 2237 
-        }
-    ]
+    {
+      "id": 1,
+      "odp": 123,
+      "colata": 123,
+      "odv": 123,
+      "set_lavorazione": "LAMINAZIONE CIRCOLARE",
+      "tipo_prodotto": "PVC",
+      "qualita": "3",
+      "lunghezza": 12223333,
+      "diametro": 1234,
+      "ultrasuoni": "stringa 1",
+      "durezza": 1237
+    },
+    {
+      "id": 2,
+      "odp": 234,
+      "colata": 2345,
+      "odv": 2346,
+      "set_lavorazione": "LAMINAZIONE CIRCOLARE 2",
+      "qualita": 3,
+      "tipo_prodotto": "PVC",
+      "lunghezza": 223,
+      "diametro": 2234,
+      "ultrasuoni": "stringa 2",
+      "durezza": 2237
+    },
+    {
+      "lunghezza": 123123,
+      "id": 3
+    }
+  ]
 }

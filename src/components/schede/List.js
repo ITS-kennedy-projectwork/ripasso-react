@@ -6,11 +6,36 @@ const List = () => {
     const navigate = useNavigate()
     const [rows, setRows] = useState([])
 
-    useEffect( () => {
+    const loadSchede = () => {
         fetch(`${api_url}/schede`)
         .then(result => result.json())
         .then(result => setRows(result))
+    }
+
+    useEffect( () => {
+        loadSchede()
     }, [])
+
+    const handleRowDelete = (id, e) => {
+        e.stopPropagation()
+        // eslint-disable-next-line no-restricted-globals
+        if(confirm(`Vuoi davvero eliminare la scheda ${id}?`)) {
+            fetch(
+                `${api_url}/schede/${id}`,
+                {
+                    method: 'DELETE',
+                }
+            )
+            .then(() => {
+                alert('Scheda eliminata')
+                loadSchede()
+            })
+            .catch(e => {
+                alert('Errore eliminazione scheda')
+                console.error(e)
+            })
+        }
+    }
 
     return <div className="schede__list">
         <h1>Elenco schede</h1>
@@ -25,6 +50,7 @@ const List = () => {
                     <th>set lavorazione</th>
                     <th>qualità</th>
                     <th>tipo prodotto</th>
+                    <th>azioni</th>
                 </tr>
             </thead>
 
@@ -42,6 +68,9 @@ const List = () => {
                             <td>{row.set_lavorazione}</td>
                             <td>{row.qualita}</td>
                             <td>{row.tipo_prodotto}</td>
+                            <td><i 
+                            onClick={e => handleRowDelete(row.id, e)} 
+                            className="bi bi-trash" /></td>
                         </tr>
                         )
                     )
