@@ -24,11 +24,13 @@
       "lunghezza": 223,
       "diametro": 2234,
       "ultrasuoni": "stringa 2",
-      "durezza": 2237
+      "durezza": 2237,
+      "note": "nota per la scheda 2 - aggiornata"
     },
     {
       "lunghezza": 123123,
-      "id": 3
+      "id": 3,
+      "note": "Test nota 3"
     }
   ]
 }

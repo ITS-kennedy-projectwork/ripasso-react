@@ -23,6 +23,16 @@ nav.sidebar li {
     padding: 0.25rem 0.5rem;
 }
 
+nav.sidebar ul ul {
+    padding: 0;
+}
+
+nav.sidebar ul ul li {
+    padding-right: 0;
+    padding-left: 16px;
+}
+
+
 
 nav.sidebar li:hover {
     background-color: #eee;
@@ -49,4 +59,8 @@ nav.sidebar-closed a {
 
 nav.sidebar-closed i {
     float: none;
+}
+
+.modal.show.fade {
+    display: block;
 }
