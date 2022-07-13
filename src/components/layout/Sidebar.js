@@ -10,8 +10,8 @@ const Sidebar = (props) => {
     return (
     <nav className={navClass}>
       <button id="sidebar-trigger" onClick={() => callback(!open)}>
-        {open && <i class="bi bi-arrow-bar-left" />}
-        {!open && <i class="bi bi-arrow-bar-right" />}
+        {open && <i className="bi bi-arrow-bar-left" />}
+        {!open && <i className="bi bi-arrow-bar-right" />}
       </button>
       <ul className="mt-5">
         <li><Link to={'/'}><span>Home </span><i className="bi bi-house" /></Link></li>

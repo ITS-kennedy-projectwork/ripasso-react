@@ -23,7 +23,9 @@ const Details = () => {
         setState({
             ...state,
             ...{
-                [fieldName]: e.target.value
+                [fieldName]: e.target.type === "number" 
+                    ? parseInt(e.target.value, 10)
+                    : e.target.value
             }
         })
     }
