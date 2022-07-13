@@ -28,6 +28,10 @@ const Details = () => {
         })
     }
 
+    const saveForm = () => {
+        console.log('State', state)
+    }
+
     return <div className="schede__details text-start">
         <h1>Dettagli scheda {id}</h1>
 
@@ -95,7 +99,7 @@ const Details = () => {
 
                     <div className="col-md-6">
                         <label htmlFor="lunghezza" className="form-label">Lunghezza {state.lunghezza}</label>
-                        <input type="lunghezza" className="form-control" id="lunghezza" value={state.lunghezza}
+                        <input type="number" className="form-control" id="lunghezza" value={state.lunghezza}
                         onChange={e => handleInputChange(e, 'lunghezza')}
                         />
                     </div>
@@ -135,7 +139,11 @@ const Details = () => {
                         </div>
                     </div>
                     <div className="col-12">
-                        <button type="submit" className="btn btn-primary">Sign in</button>
+                        <button 
+                            type="button" 
+                            className="btn btn-primary"
+                            onClick={saveForm}
+                        >Salva</button>
                     </div>
                     </form>
 
