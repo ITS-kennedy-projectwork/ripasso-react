@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
+import { api_url } from '../../config'
+import { qualityValues } from '../../constants'
 
 const Details = () => {
     let {id} = useParams()
@@ -8,15 +10,69 @@ const Details = () => {
     const [state, setState] = useState({})
 
     useEffect(() => {
-        // fetch('http://localhost:3000/api/schede/' + id + '.json')
-        fetch(`http://localhost:3000/api/schede/${id}.json`)
-            .then(result => result.json())
-            .then(result => setState(result))
-            .catch(error => {
-                alert('Errore nella chiamata')
-                navigate('/schede')
-            })
+        if(id !== 'new') {
+            fetch(`${api_url}/schede/${id}`)
+                .then(result => result.json())
+                .then(result => setState(result))
+                .catch(error => {
+                    alert('Errore nella chiamata')
+                    navigate('/schede')
+                })
+        } else {
+            console.log('è una nuova scheda')
+        }
     }, [id])
+
+    const handleInputChange = (e, fieldName) => {
+        setState({
+            ...state,
+            ...{
+                [fieldName]: e.target.type === "number" 
+                    ? parseInt(e.target.value, 10)
+                    : e.target.value
+            }
+        })
+    }
+
+    const handleDelete = () => {
+        fetch(
+            `${api_url}/schede/${id}`,
+            {
+                method: 'DELETE',
+            }
+        )
+        .then(() => {
+            alert('Scheda eliminata')
+            navigate('/schede')
+        })
+        .catch(e => {
+            alert('Errore eliminazione scheda')
+            console.error(e)
+        })
+    }
+
+    const saveForm = () => {
+        console.log('State', state)
+        fetch(
+            `${api_url}/schede${id === 'new' ? '': `/${id}`}`,
+            {
+                method: id === 'new' 
+                    ? 'POST'
+                    : 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(state)
+            }
+        )
+        .then(() => {
+            navigate('/schede')
+        })
+        .catch(e => {
+            alert('Errore salvataggio')
+            console.error(e)
+        })
+    }
 
     return <div className="schede__details text-start">
         <h1>Dettagli scheda {id}</h1>
@@ -69,47 +125,43 @@ const Details = () => {
             <div className="col">
 
                 <form className="row g-3">
-                    <div className="col-md-6">
-                        <label htmlFor="inputEmail4" className="form-label">Email</label>
-                        <input type="email" className="form-control" id="inputEmail4" />
-                    </div>
-                    <div className="col-md-6">
-                        <label htmlFor="inputPassword4" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="inputPassword4" />
-                    </div>
-                    <div className="col-12">
-                        <label htmlFor="inputAddress" className="form-label">Address</label>
-                        <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" />
-                    </div>
-                    <div className="col-12">
-                        <label htmlFor="inputAddress2" className="form-label">Address 2</label>
-                        <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
-                    </div>
-                    <div className="col-md-6">
-                        <label htmlFor="inputCity" className="form-label">City</label>
-                        <input type="text" className="form-control" id="inputCity" />
-                    </div>
-                    <div className="col-md-4">
-                        <label htmlFor="inputState" className="form-label">State</label>
-                        <select id="inputState" className="form-select">
-                        <option>Choose...</option>
-                        <option>...</option>
+                    <div className='col-md-6'>
+                        <label htmlFor='quality' className='form-label'>Qualità {state.qualita}</label>
+                        <select 
+                            id='quality' 
+                            className='form-select'
+                            value={state.qualita}
+                            onChange={e => handleInputChange(e, 'qualita')}
+                        >
+                            <option>Seleziona...</option>
+                            {Object.keys(qualityValues).map( q => <option key={q} value={q}>{qualityValues[q]}</option>)}
                         </select>
                     </div>
-                    <div className="col-md-2">
-                        <label htmlFor="inputZip" className="form-label">Zip</label>
-                        <input type="text" className="form-control" id="inputZip" />
+
+
+                    <div className="col-md-6">
+                        <label htmlFor="lunghezza" className="form-label">Lunghezza {state.lunghezza}</label>
+                        <input type="number" className="form-control" id="lunghezza" value={state.lunghezza}
+                        onChange={e => handleInputChange(e, 'lunghezza')}
+                        />
                     </div>
+                    
                     <div className="col-12">
-                        <div className="form-check">
-                        <input className="form-check-input" type="checkbox" id="gridCheck" />
-                        <label className="form-check-label" htmlFor="gridCheck">
-                            Check me out
-                        </label>
-                        </div>
-                    </div>
-                    <div className="col-12">
-                        <button type="submit" className="btn btn-primary">Sign in</button>
+                        {
+                            id !== 'new' &&
+                            <button
+                                type="button"
+                                className="btn btn-danger me-5"
+                                onClick={handleDelete}
+                            >Elimina</button>
+                        }
+                  
+
+                        <button 
+                            type="button" 
+                            className="btn btn-primary"
+                            onClick={saveForm}
+                        >Salva</button>
                     </div>
                     </form>
 

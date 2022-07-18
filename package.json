@@ -7,6 +7,8 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.0-beta1",
+    "bootstrap-icons": "^1.8.3",
+    "json-server": "^0.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
@@ -18,7 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "webserver": "serve build"
+    "webserver": "serve build",
+    "database": "json-server --watch db.json --port 3004"
   },
   "eslintConfig": {
     "extends": [
